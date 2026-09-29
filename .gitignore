@@ -1,13 +1,2 @@
 *.secret
-
 .vscode/
-*.suo
-*.user
-
-build/
-bin/
-obj/
-*.so
-*.o
-*.a
-*.out
