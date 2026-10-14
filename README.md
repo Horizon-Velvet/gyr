@@ -4,10 +4,16 @@
 
 <br> <h2 align="center">Libraries</h2>
 
-* Download sylt library [here](../../releases/tag/sylt).
+* Download **sylt** library [here](../../releases/tag/sylt).
 
-<br> <h2 align="center">LICENSE</h2>
+<h2 align="center">LICENSE</h2>
 
-Licensed under:
+<div align="center">
 
-Apache License, Version 2.0 ([LICENSE](LICENSE) or https://www.apache.org/licenses/LICENSE-2.0)
+<a href="https://www.apache.org/licenses/LICENSE-2.0">
+	<img src="https://img.shields.io/badge/License-Apache_2.0-blue.svg" alt="Apache License 2.0">
+</a>
+
+<p>Licensed under the Apache License, Version 2.0 (<a href="LICENSE">LICENSE</a> or <a href="https://www.apache.org/licenses/LICENSE-2.0">Apache License 2.0</a>).</p>
+
+</div>
