@@ -18,7 +18,7 @@
 
 #include "./sylt.hpp"
 
-    using namespace sylt;
+using namespace sylt;
 
 namespace sylt
 {
