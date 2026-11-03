@@ -14,7 +14,7 @@ int main(int argc, char* argv[]) {
     // setup
     CLI::App app("A project manager.", "gmgr");
     app.set_version_flag("-V,--version",
-        "gmgr (gyr) v0.1.0-alpha\n\nLicensed under the Apache 2.0 License");
+        "gmgr (gCLI) v0.1.1-alpha\n\nLicensed under the Apache 2.0 License");
     app.fallthrough();
 
     // params
@@ -30,6 +30,14 @@ int main(int argc, char* argv[]) {
     const auto init_cmd = app.add_subcommand("init", "Initializes a default project.");
     init_cmd->add_option("file_path", file_path, "The path to initialize a project.")
         ->default_val(".");
+
+    // const auto check_cmd = app.add_subcommand("save", "Saves a project.");
+    // check_cmd->add_option("file_path", file_path, "The path to save a project.")
+    //     ->default_val(".");
+
+    // check_cmd->callback([&] {
+    //     cmds::check(file_path, verbose);
+    // });
 
     init_cmd->callback([&] {
         cmds::init(file_path, verbose);

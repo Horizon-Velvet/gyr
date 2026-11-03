@@ -161,7 +161,7 @@ int main(int argc, char* argv[]) {
     CLI::App app("A simple installer.", "ginst");
 
     app.set_version_flag("-V, --version",
-        "ginst (gyr) v0.1.0-alpha\n\nLicensed under the Apache 2.0 License");
+        "ginst (gCLI) v0.1.1-alpha\n\nLicensed under the Apache 2.0 License");
 
     app.fallthrough();
 
