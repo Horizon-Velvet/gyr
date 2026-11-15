@@ -16,16 +16,23 @@ target_include_directories(look PRIVATE
 )
 
 target_compile_options(look PRIVATE
-    -O3
+    -Oz
     -DNDEBUG
     -flto
     -ffunction-sections
     -fdata-sections
+    -fno-rtti
+    -fno-unwind-tables
+    -fno-asynchronous-unwind-tables
 )
 
 target_link_options(look PRIVATE
-    -O3
+    -Oz
     -flto
+    -fno-rtti
+    -fno-unwind-tables
+    -fno-asynchronous-unwind-tables
     -Wl,--gc-sections
     -Wl,--strip-all
+    -Wl,--as-needed
 )

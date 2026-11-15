@@ -7,7 +7,9 @@
 #include <termios.h>
 #include <unistd.h>
 
-#include "defs.hpp"
+#include "ansi.hpp"
+
+namespace fs = std::filesystem;
 
 namespace render {
 class Screen {
@@ -19,7 +21,6 @@ class Screen {
 
         termios raw = orig_termios_;
         cfmakeraw(&raw);
-        raw.c_lflag |= ISIG;
 
         if (tcsetattr(STDIN_FILENO, TCSAFLUSH, &raw) == -1) {
             throw std::runtime_error("tcsetattr failed");
@@ -27,7 +28,8 @@ class Screen {
 
         active_ = true;
 
-        std::cout << render::ansi::screen_enable << std::flush;
+        std::cout << ansi::esc::enable_buf << ansi::esc::hide_cursor
+                  << std::flush;
     }
 
     ~Screen() { restore(); }
@@ -45,16 +47,16 @@ class Screen {
             active_ = false;
         }
 
-        std::cout << render::ansi::screen_disable << std::flush;
+        std::cout << ansi::esc::disable_buf << ansi::esc::show_cursor
+                  << std::flush;
     }
 };
-
 struct SharedState {
-    std::filesystem::path cwd;
-    std::size_t selected;
+    fs::path cwd;
+    std::size_t selected = 0;
     std::string input;
     bool running = true;
 };
 
-void reload(SharedState &state);
+void reload(const SharedState &state);
 } // namespace render

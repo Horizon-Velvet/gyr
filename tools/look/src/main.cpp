@@ -1,4 +1,3 @@
-#include <csignal>
 #include <filesystem>
 #include <ios>
 #include <iostream>
@@ -7,10 +6,7 @@
 #include "../inc/render.hpp"
 
 namespace fs = std::filesystem;
-
-volatile std::sig_atomic_t g_running = 1;
-
-void handle_sigint(int) { g_running = 0; }
+using namespace std::chrono_literals;
 
 int main(int argc, char *argv[]) {
     if (argc > 2) {
@@ -27,25 +23,26 @@ int main(int argc, char *argv[]) {
         std::cout << ec.message();
         return 1;
     }
-
-    std::signal(SIGINT, handle_sigint);
-
-    render::Screen screen;
-
     if (argc == 2 && fs::exists(argv[1]) && fs::is_directory(argv[1])) {
         state.cwd = argv[1];
     }
 
-    render::reload(state);
+    // main
 
-    while (state.running && g_running) {
+    render::Screen screen;
+
+    while (state.running) {
         render::reload(state);
 
         char ch;
-        if (read(STDIN_FILENO, &ch, 1) == 1) {
-            if (ch == 'q') {
-                state.running = false;
-            }
+        if (read(STDIN_FILENO, &ch, 1) != 1) {
+            continue;
+        }
+
+        switch (ch) {
+        case 'q':
+            state.running = false;
+            break;
         }
     }
 
