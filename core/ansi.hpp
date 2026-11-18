@@ -14,6 +14,8 @@
 
 namespace ansi {
 
+inline constexpr unsigned int max_bound = 32767;
+
 namespace gfx {
 inline constexpr std::string_view reset = "\x1B[0m";
 inline constexpr std::string_view rst_bold = "\x1B[22m";
@@ -74,7 +76,7 @@ inline constexpr std::string_view h_white_bkg = "\x1B[107m";
 } // namespace c16
 
 namespace c256 {
-inline constexpr std::string rgb(int r, int g, int b) {
+inline std::string rgb(int r, int g, int b) {
     r = std::clamp(r, 0, 255);
     g = std::clamp(g, 0, 255);
     b = std::clamp(b, 0, 255);
@@ -103,19 +105,29 @@ inline std::string set(unsigned int r, unsigned int c) {
     return std::format("\x1B[{};{}H", r, c);
 }
 
-inline std::string up(unsigned int n) { return std::format("\x1B[{}A", n); }
+inline std::string up(unsigned int n) {
+    return std::format("\x1B[{}A", n);
+}
 
-inline std::string down(unsigned int n) { return std::format("\x1B[{}B", n); }
+inline std::string down(unsigned int n) {
+    return std::format("\x1B[{}B", n);
+}
 
-inline std::string right(unsigned int n) { return std::format("\x1B[{}C", n); }
+inline std::string right(unsigned int n) {
+    return std::format("\x1B[{}C", n);
+}
 
-inline std::string left(unsigned int n) { return std::format("\x1B[{}D", n); }
+inline std::string left(unsigned int n) {
+    return std::format("\x1B[{}D", n);
+}
 
 inline std::string beg_down(unsigned int n) {
     return std::format("\x1B[{}E", n);
 }
 
-inline std::string beg_up(unsigned int n) { return std::format("\x1B[{}F", n); }
+inline std::string beg_up(unsigned int n) {
+    return std::format("\x1B[{}F", n);
+}
 
 inline std::string scroll_down(unsigned int n) {
     return std::format("\x1B[{}S", n);
